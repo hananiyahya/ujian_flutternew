@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'screens/home_screen.dart';
 import 'theme.dart';
+import 'models/programme.dart';
+import 'screens/programme_detail_screen.dart';
 
 void main() {
   runApp(const EttMobileApp());
@@ -17,7 +19,16 @@ class EttMobileApp extends StatelessWidget {
       title: 'eTT Mobile',
       debugShowCheckedModeBanner: false,
       theme: KptTheme.light,      // tema navy + emas
-      home: const HomeScreen(),   // skrin kekal aplikasi
-    );
+      home: const HomeScreen(), 
+      onGenerateRoute: (settings) {
+          if (settings.name == '/detail') {
+            final programme = settings.arguments as Programme;
+            return MaterialPageRoute(
+              builder: (_) => ProgrammeDetailScreen(programme: programme),
+            );
+          }
+          return null;
+       } // laluan tidak dikenali  // skrin kekal aplikasi
+  );
   }
 }
